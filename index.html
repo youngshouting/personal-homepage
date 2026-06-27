@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>杨啸天 · 个人主页</title>
+<style>
+/* ========== 基础重置 & 变量 ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;
+  --bg2:#0e0e0e;
+  --bg3:#141414;
+  --card:#1a1a1a;
+  --border:#222;
+  --text:#f0f0f0;
+  --text2:#999;
+  --text3:#555;
+  --accent1:#3b82f6;
+  --accent2:#8b5cf6;
+  --grad:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  --radius:12px;
+  --font:'SF Pro Display','-apple-system','BlinkMacSystemFont','Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  --mono:'SF Mono','SFMono-Regular','Consolas','Liberation Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+::selection{background:rgba(59,130,246,.35);color:#fff}
+
+/* ========== 工具类 ========== */
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section{padding:100px 0}
+.section-title{
+  font-size:clamp(28px,4vw,36px);
+  font-weight:700;
+  margin-bottom:12px;
+  letter-spacing:-.02em;
+}
+.section-sub{
+  color:var(--text2);
+  font-size:16px;
+  margin-bottom:56px;
+  max-width:560px;
+}
+.tag{
+  display:inline-block;
+  padding:4px 14px;
+  border-radius:999px;
+  font-size:13px;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+  color:var(--text2);
+  transition:.25s;
+}
+.tag:hover{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:var(--text)}
+
+/* ========== 导航 ========== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 24px;
+  height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,.7);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid transparent;
+  transition:.35s;
+}
+.navbar.scrolled{border-color:var(--border)}
+.nav-logo{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.nav-logo span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:32px;list-style:none;font-size:14px}
+.nav-links a{color:var(--text2);transition:.25s;position:relative}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;
+  background:var(--grad);transition:.35s;border-radius:2px;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+
+/* ========== Hero ========== */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 70% 60% at center,black,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at center,black,transparent 80%);
+}
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,.08),transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-content{text-align:center;position:relative;z-index:1;padding:0 24px}
+.hero-badge{
+  display:inline-block;
+  padding:6px 18px;
+  border-radius:999px;
+  font-size:13px;
+  background:rgba(59,130,246,.1);
+  border:1px solid rgba(59,130,246,.2);
+  color:var(--accent1);
+  margin-bottom:28px;
+  letter-spacing:.03em;
+}
+.hero-name{
+  font-size:clamp(48px,10vw,88px);
+  font-weight:800;
+  letter-spacing:-.04em;
+  line-height:1.05;
+  margin-bottom:12px;
+}
+.hero-name span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title{
+  font-size:clamp(16px,2.5vw,20px);
+  color:var(--text2);
+  font-weight:400;
+  margin-bottom:20px;
+  letter-spacing:.02em;
+}
+.hero-desc{
+  font-size:15px;
+  color:var(--text3);
+  max-width:500px;
+  margin:0 auto 40px;
+  line-height:1.8;
+}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;
+  border-radius:999px;
+  font-size:14px;font-weight:500;
+  border:none;cursor:pointer;
+  transition:.3s;
+  font-family:var(--font);
+}
+.btn-primary{
+  background:var(--grad);
+  color:#fff;
+  box-shadow:0 4px 20px rgba(59,130,246,.25);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,.35)}
+.btn-outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);
+}
+.btn-outline:hover{background:rgba(255,255,255,.05);border-color:var(--text3)}
+
+.scroll-hint{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--text3);font-size:12px;letter-spacing:.06em;
+  animation:float 2.5s ease-in-out infinite;
+}
+.scroll-hint svg{animation:bounce 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+/* ========== About ========== */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:start;
+}
+.about-text p{color:var(--text2);font-size:15px;margin-bottom:16px;line-height:1.9}
+.about-text p:last-child{margin-bottom:0}
+.about-skills h3{font-size:16px;font-weight:600;margin-bottom:16px}
+.skill-list{display:flex;flex-wrap:wrap;gap:8px}
+.skill-list .tag{font-size:12.5px}
+.about-info{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.info-item{}
+.info-label{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.info-value{font-size:15px;color:var(--text2)}
+
+/* ========== Projects ========== */
+.project-card{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:0;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--card);
+  border:1px solid var(--border);
+  margin-bottom:40px;
+  transition:.3s;
+}
+.project-card:last-child{margin-bottom:0}
+.project-card:hover{border-color:rgba(59,130,246,.15)}
+.project-visual{
+  position:relative;
+  overflow:hidden;
+  min-height:360px;
+  display:flex;align-items:center;justify-content:center;
+}
+.project-visual canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+}
+.project-visual-label{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  color:rgba(255,255,255,.08);
+  font-size:clamp(32px,5vw,52px);
+  font-weight:800;
+  letter-spacing:-.03em;
+  line-height:1.2;
+  pointer-events:none;
+  user-select:none;
+}
+.project-meta{
+  padding:40px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.project-type{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--accent1);
+  margin-bottom:8px;
+  font-weight:600;
+}
+.project-name{
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:12px;
+  letter-spacing:-.02em;
+}
+.project-desc{
+  font-size:14.5px;
+  color:var(--text2);
+  line-height:1.8;
+  margin-bottom:20px;
+}
+.project-specs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 20px;
+  margin-bottom:20px;
+}
+.project-specs dt{
+  font-size:12px;
+  color:var(--text3);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.project-specs dd{
+  font-size:14px;
+  color:var(--text);
+  font-weight:500;
+}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px}
+.project-tags .tag{font-size:11.5px;padding:3px 12px}
+
+.project-card:nth-child(even){direction:rtl}
+.project-card:nth-child(even) .project-meta{direction:ltr}
+
+/* ========== Contact ========== */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.contact-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:32px;
+  text-align:center;
+  transition:.3s;
+}
+.contact-card:hover{border-color:rgba(59,130,246,.2);transform:translateY(-4px)}
+.contact-icon{
+  width:44px;height:44px;
+  margin:0 auto 16px;
+  border-radius:12px;
+  background:rgba(59,130,246,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent1);
+}
+.contact-card h3{font-size:14px;font-weight:600;margin-bottom:4px}
+.contact-card p{font-size:14px;color:var(--text2)}
+
+/* ========== Footer ========== */
+.footer{
+  border-top:1px solid var(--border);
+  padding:32px 0;
+  text-align:center;
+  font-size:13px;
+  color:var(--text3);
+}
+
+/* ========== 滚动渐入动画 ========== */
+.reveal{opacity:0;transform:translateY(40px);transition:.7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ========== 响应式 ========== */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .project-card{grid-template-columns:1fr}
+  .project-visual{min-height:240px}
+  .project-meta{padding:28px}
+  .contact-grid{grid-template-columns:1fr 1fr}
+  .project-card:nth-child(even){direction:ltr}
+  .project-specs{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:rgba(8,8,8,.96);flex-direction:column;gap:0;padding:12px 0;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .nav-links a{display:block;padding:12px 24px}
+  .nav-toggle{display:flex}
+  .contact-grid{grid-template-columns:1fr}
+  .section{padding:64px 0}
+  .project-visual{min-height:200px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== 导航 ====== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo"><span>杨啸天</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">关于</a></li>
+    <li><a href="#projects">项目</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="菜单">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ====== Hero ====== -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">硬件工程 · 磁传感技术</div>
+    <h1 class="hero-name"><span>杨啸天</span></h1>
+    <p class="hero-title">硬件工程师 / 传感器技术研究者</p>
+    <p class="hero-desc">专注于 TMR 与 GMR 磁传感技术，从事电流传感器模组与芯片设计，探索高精度、低功耗的磁测量方案。</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        查看项目
+      </a>
+      <a href="#contact" class="btn btn-outline">联系我</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>向下滚动</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ====== 关于我 ====== -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">关于我</h2>
+      <p class="section-sub">一名致力于磁传感技术的硬件研究者</p>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>
+          我是杨啸天，一名硬件方向的硕士研究生，研究方向聚焦于磁阻式电流传感器技术。从传感器芯片设计到模组集成，我在 TMR（隧穿磁阻）与 GMR（巨磁阻）两条技术路线上均有深入的项目实践。
+        </p>
+        <p>
+          我的工作覆盖了从器件物理理解、芯片版图设计、信号调理电路开发，到模组验证测试的完整链条。我相信传感技术是连接物理世界与数字世界的桥梁，并致力于在这个领域做出真正的工程贡献。
+        </p>
+      </div>
+      <div>
+        <div class="about-skills">
+          <h3>研究方向与技能</h3>
+          <div class="skill-list">
+            <span class="tag">TMR 传感器</span>
+            <span class="tag">GMR 传感器</span>
+            <span class="tag">模拟电路设计</span>
+            <span class="tag">PCB 设计</span>
+            <span class="tag">信号调理</span>
+            <span class="tag">磁路仿真</span>
+            <span class="tag">嵌入式系统</span>
+            <span class="tag">芯片版图设计</span>
+            <span class="tag">传感器测试</span>
+            <span class="tag">低噪放设计</span>
+          </div>
+        </div>
+        <div class="about-info">
+          <div class="info-item">
+            <div class="info-label">学历</div>
+            <div class="info-value">硕士研究生 · 硬件方向</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">所在地</div>
+            <div class="info-value">中国</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 项目展示 ====== -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">项目展示</h2>
+      <p class="section-sub">硬件项目的完整设计与实现</p>
+    </div>
+
+    <!-- 项目 1: TMR -->
+    <div class="project-card reveal">
+      <div class="project-visual" id="tmrCanvas"></div>
+      <div class="project-meta">
+        <div class="project-type">TMR 技术</div>
+        <h3 class="project-name">TMR 电流传感器模组设计</h3>
+        <p class="project-desc">
+          基于隧穿磁阻效应（TMR）设计了一款高灵敏度、低功耗的电流传感器模组。项目涵盖磁路结构仿真优化、TMR 传感器选型适配、低噪声信号调理电路设计，以及完整的 PCB 布局与电磁兼容性考量。
+        </p>
+        <dl class="project-specs">
+          <dt>灵敏度</dt><dd>&gt; 50 mV/A</dd>
+          <dt>带宽</dt><dd>DC ~ 500 kHz</dd>
+          <dt>非线性度</dt><dd>&lt; 0.5% FS</dd>
+          <dt>应用场景</dt><dd>工业电流检测 · 电力监测</dd>
+        </dl>
+        <div class="project-tags">
+          <span class="tag">TMR</span>
+          <span class="tag">磁路仿真</span>
+          <span class="tag">信号调理</span>
+          <span class="tag">PCB 设计</span>
+          <span class="tag">低噪声放大</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 项目 2: GMR -->
+    <div class="project-card reveal">
+      <div class="project-visual" id="gmrCanvas"></div>
+      <div class="project-meta">
+        <div class="project-type">GMR 技术</div>
+        <h3 class="project-name">GMR 电流传感器芯片及后续电路设计</h3>
+        <p class="project-desc">
+          基于巨磁阻效应（GMR）设计了一款电流传感器芯片，并完成了从芯片到模组的完整信号链路开发。项目包括 GMR 多层膜结构设计、芯片版图设计与流片验证，以及后端的信号放大、滤波、温度补偿与输出接口电路。
+        </p>
+        <dl class="project-specs">
+          <dt>芯片灵敏度</dt><dd>&gt; 3 mV/V/Oe</dd>
+          <dt>信噪比</dt><dd>&gt; 60 dB</dd>
+          <dt>功耗</dt><dd>&lt; 5 mW</dd>
+          <dt>后续电路</dt><dd>放大 · 滤波 · 补偿 · 接口</dd>
+        </dl>
+        <div class="project-tags">
+          <span class="tag">GMR</span>
+          <span class="tag">芯片设计</span>
+          <span class="tag">版图设计</span>
+          <span class="tag">信号链路</span>
+          <span class="tag">温度补偿</span>
+          <span class="tag">接口电路</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 联系方式 ====== -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">联系方式</h2>
+      <p class="section-sub">欢迎交流与合作</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+        </div>
+        <h3>邮箱</h3>
+        <p>yangxiaotian@example.com</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        </div>
+        <h3>GitHub</h3>
+        <p>github.com/yangxiaotian</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>所在地</h3>
+        <p>中国</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Footer ====== -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 杨啸天 · 保留所有权利</p>
+  </div>
+</footer>
+
+<script>
+// ====== 导航滚动效果 ======
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ====== 移动端菜单 ======
+const toggle=document.getElementById('navToggle');
+const links=document.getElementById('navLinks');
+toggle.addEventListener('click',()=>links.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>links.classList.remove('open'));
+});
+
+// ====== 滚动渐入观察器 ======
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ====== 项目展示 Canvas 动效 ======
+function initProjectCanvas(id,colors){
+  const container=document.getElementById(id);
+  if(!container)return;
+  const c=document.createElement('canvas');
+  c.width=container.clientWidth||400;
+  c.height=container.clientHeight||360;
+  container.appendChild(c);
+  const ctx=c.getContext('2d');
+
+  // 响应式尺寸
+  const resize=()=>{
+    const rect=container.getBoundingClientRect();
+    c.width=rect.width||400;
+    c.height=rect.height||360;
+  };
+  window.addEventListener('resize',resize);
+
+  // 粒子
+  const count=70;
+  const particles=[];
+  for(let i=0;i<count;i++){
+    particles.push({
+      x:Math.random()*c.width,
+      y:Math.random()*c.height,
+      vx:(Math.random()-0.5)*0.6,
+      vy:(Math.random()-0.5)*0.6,
+      r:Math.random()*2+1,
+    });
+  }
+
+  let frame;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+
+    // 背景渐变
+    const grad=ctx.createRadialGradient(c.width/2,c.height/2,0,c.width/2,c.height/2,Math.max(c.width,c.height)*0.7);
+    grad.addColorStop(0,colors.bg0);
+    grad.addColorStop(1,colors.bg1);
+    ctx.fillStyle=grad;
+    ctx.fillRect(0,0,c.width,c.height);
+
+    // 连线
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(255,255,255,${0.04*(1-dist/120)})`;
+          ctx.lineWidth=0.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // 粒子
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=colors.dot;
+      ctx.fill();
+
+      p.x+=p.vx;
+      p.y+=p.vy;
+      if(p.x<0||p.x>c.width)p.vx*=-1;
+      if(p.y<0||p.y>c.height)p.vy*=-1;
+    });
+
+    frame=requestAnimationFrame(draw);
+  }
+  draw();
+
+  // 清理
+  const observer2=new MutationObserver(()=>{
+    if(!document.body.contains(c)){
+      cancelAnimationFrame(frame);
+      observer2.disconnect();
+    }
+  });
+  observer2.observe(document.body,{childList:true,subtree:true});
+}
+
+initProjectCanvas('tmrCanvas',{
+  bg0:'rgba(59,130,246,0.06)',
+  bg1:'rgba(8,8,8,0.95)',
+  dot:'rgba(59,130,246,0.25)',
+});
+initProjectCanvas('gmrCanvas',{
+  bg0:'rgba(139,92,246,0.06)',
+  bg1:'rgba(8,8,8,0.95)',
+  dot:'rgba(139,92,246,0.25)',
+});
+</script>
+</body>
+</html>
