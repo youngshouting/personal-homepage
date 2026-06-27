@@ -112,49 +112,11 @@ document.querySelectorAll('[data-canvas-bg0]').forEach(el=>{
   });
 });
 
-// ====== 图片 Lightbox（点击放大 + 下载） ======
-(function(){
-  // 创建 lightbox DOM
-  const overlay = document.createElement('div');
-  overlay.className = 'lightbox-overlay';
-  overlay.innerHTML = `
-    <div class="lightbox-toolbar">
-      <a class="lightbox-download" title="下载图片" download>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        下载
-      </a>
-      <button class="lightbox-close" title="关闭">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
-    <img class="lightbox-img" alt="" />
-  `;
-  document.body.appendChild(overlay);
-
-  const img = overlay.querySelector('.lightbox-img');
-  const downloadBtn = overlay.querySelector('.lightbox-download');
-  const closeBtn = overlay.querySelector('.lightbox-close');
-
-  // 关闭
-  function close(){ overlay.classList.remove('open'); }
-  closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', e => { if(e.target === overlay) close(); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
-
-  // 给所有 .media-item img 绑定点击
-  document.addEventListener('click', e => {
-    const target = e.target.closest('.media-item img');
-    if(!target) return;
-    const src = target.src;
-    img.src = src;
-    img.alt = target.alt || '';
-    downloadBtn.href = src;
-    // 生成下载文件名
-    const parts = src.split('/');
-    const rawName = parts.pop() || 'image.png';
-    const projectId = parts[parts.indexOf('projects') + 1] || 'project';
-    downloadBtn.href = src;
-    downloadBtn.download = rawName;
-    overlay.classList.add('open');
-  });
-})();
+// ====== 图片点击新标签打开 + 下载 ======
+document.addEventListener('click', e => {
+  const target = e.target.closest('.media-item img');
+  if (!target) return;
+  // 如果点击的是下载按钮则不触发
+  if (e.target.closest('.media-download')) return;
+  window.open(target.src, '_blank');
+});
