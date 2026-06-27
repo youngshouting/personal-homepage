@@ -12,10 +12,11 @@ from flask import (
     flash,
     redirect,
     url_for,
+    abort,
 )
 from flask_wtf.csrf import CSRFProtect
 
-from utils.content_loader import get_all_content
+from utils.content_loader import get_all_content, load_project
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
@@ -27,6 +28,15 @@ def home():
     """渲染主页。"""
     content = get_all_content()
     return render_template("index.html", **content)
+
+
+@app.route("/project/<project_id>")
+def project_detail(project_id):
+    """项目详情页。"""
+    project = load_project(project_id)
+    if project is None:
+        abort(404)
+    return render_template("project_detail.html", project=project)
 
 
 @app.route("/contact", methods=["POST"])

@@ -1,0 +1,32 @@
+<!-- ====== 实习经历 ====== -->
+<section class="section" id="internship">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">实习经历</h2>
+      <p class="section-sub">工程实践与项目经验</p>
+    </div>
+    {% for exp in internship %}
+    <div class="internship-card reveal">
+      <div class="internship-header">
+        <div>
+          <h3 class="internship-company">{{ exp.company }}</h3>
+          <span class="internship-role">{{ exp.role }}</span>
+        </div>
+        <span class="internship-period">{{ exp.period }}</span>
+      </div>
+      <h4 class="internship-project">{{ exp.project }}</h4>
+      <p class="internship-desc">{{ exp.description }}</p>
+      <ul class="internship-details">
+        {% for detail in exp.details %}
+        <li>{{ detail }}</li>
+        {% endfor %}
+      </ul>
+      <div class="internship-tags">
+        {% for tag in exp.tech_tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>

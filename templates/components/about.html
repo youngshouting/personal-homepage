@@ -12,14 +12,21 @@
         {% endfor %}
       </div>
       <div>
+        <!-- 个人技能（分类展示） -->
         <div class="about-skills">
-          <h3>研究方向与技能</h3>
-          <div class="skill-list">
-            {% for skill in skills %}
-            <span class="tag">{{ skill }}</span>
-            {% endfor %}
+          <h3>个人技能</h3>
+          {% for skill_group in skills %}
+          <div class="skill-group">
+            <div class="skill-group-label">{{ skill_group.category }}</div>
+            <div class="skill-list">
+              {% for item in skill_group['items'] %}
+              <span class="tag">{{ item }}</span>
+              {% endfor %}
+            </div>
           </div>
+          {% endfor %}
         </div>
+        <!-- 个人信息 -->
         <div class="about-info">
           {% for key, value in profile.info.items() %}
           <div class="info-item">

@@ -8,12 +8,18 @@
     <div class="project-visual-label">{{ project.type }}</div>
   </div>
   <div class="project-meta">
-    <div class="project-type">{{ project.type }}</div>
+    <div class="project-meta-top">
+      <div class="project-type">{{ project.type }}</div>
+      {% if project.status %}
+      <span class="project-status status-{{ 'done' if project.status == '已完成' else 'ongoing' }}">{{ project.status }}</span>
+      {% endif %}
+    </div>
     <h3 class="project-name">{{ project.name }}</h3>
-    <p class="project-desc">{{ project.description }}</p>
+    <p class="project-desc">{{ project.description_short if project.description_short else project.description }}</p>
     <dl class="project-specs">
-      {% for key, value in project.specs.items() %}
-      <dt>{{ key }}</dt><dd>{{ value }}</dd>
+      {% set keys = project.specs.keys() | list %}
+      {% for i in range(4) if i < keys | length %}
+      <dt>{{ keys[i] }}</dt><dd>{{ project.specs[keys[i]] }}</dd>
       {% endfor %}
     </dl>
     <div class="project-tags">
@@ -21,5 +27,9 @@
       <span class="tag">{{ tag }}</span>
       {% endfor %}
     </div>
+    <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn btn-primary project-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      查看详情
+    </a>
   </div>
 </div>

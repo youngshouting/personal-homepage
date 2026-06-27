@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ project.name }} · 杨啸天</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ====== 详情页导航 ====== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <a href="{{ url_for('home') }}"><span>杨啸天</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="{{ url_for('home') }}" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      返回主页
+    </a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="菜单">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ====== 项目 Hero ====== -->
+<section class="detail-hero">
+  <div class="detail-hero-bg" id="detailCanvas"
+       data-canvas-bg0="{{ project.canvas_colors.bg0 }}"
+       data-canvas-bg1="{{ project.canvas_colors.bg1 }}"
+       data-canvas-dot="{{ project.canvas_colors.dot }}">
+    <div class="detail-hero-content">
+      <div class="detail-hero-badge">{{ project.type }}</div>
+      {% if project.status %}
+      <span class="project-status status-{{ 'done' if project.status == '已完成' else 'ongoing' }}">{{ project.status }}</span>
+      {% endif %}
+      <h1 class="detail-hero-title">{{ project.name }}</h1>
+      <p class="detail-hero-sub">
+        <span class="detail-hero-role">{{ project.role }}</span>
+        <span class="detail-hero-period">{{ project.period }}</span>
+      </p>
+      <p class="detail-hero-desc">{{ project.description_short }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 项目概述 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">项目概述</h2>
+    </div>
+    <div class="detail-text reveal">
+      {% for para in project.description_long.split('\n\n') %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ====== 技术规格 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">技术规格</h2>
+    </div>
+    <div class="specs-grid reveal">
+      {% for key, value in project.specs.items() %}
+      <div class="specs-item">
+        <dt class="specs-label">{{ key }}</dt>
+        <dd class="specs-value">{{ value }}</dd>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ====== 预留接口区：作品图片 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">📷 作品图片</h2>
+      <p class="section-sub">实物展示与成果</p>
+    </div>
+    {% if project.sections.images.content | length > 0 %}
+    <div class="media-grid reveal">
+      {% for img in project.sections.images.content %}
+      <div class="media-item">
+        <img src="{{ img.url }}" alt="{{ img.caption }}">
+        {% if img.caption %}<p class="media-caption">{{ img.caption }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="placeholder-section reveal">
+      <div class="placeholder-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <p class="placeholder-text">此处将展示作品图片</p>
+      <p class="placeholder-hint">后续可在 <code>data/projects/{{ project.id }}.json</code> 中添加图片</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ====== 预留接口区：设计思路 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">💡 设计思路</h2>
+      <p class="section-sub">方案选型与设计考量</p>
+    </div>
+    {% if project.sections.design_thinking.text %}
+    <div class="detail-text reveal">
+      <p>{{ project.sections.design_thinking.text }}</p>
+    </div>
+    {% else %}
+    <div class="placeholder-section reveal">
+      <div class="placeholder-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <p class="placeholder-text">此处将展示设计思路</p>
+      <p class="placeholder-hint">后续可在 <code>data/projects/{{ project.id }}.json</code> 中添加设计说明与图示</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ====== 预留接口区：原理图 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">📐 原理图</h2>
+      <p class="section-sub">电路原理设计与方案</p>
+    </div>
+    {% if project.sections.schematics.images | length > 0 %}
+    <div class="media-grid reveal">
+      {% for img in project.sections.schematics.images %}
+      <div class="media-item media-item-full">
+        <img src="{{ img.url }}" alt="{{ img.caption }}">
+        {% if img.caption %}<p class="media-caption">{{ img.caption }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="placeholder-section reveal">
+      <div class="placeholder-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <p class="placeholder-text">此处将展示原理图</p>
+      <p class="placeholder-hint">后续可在 <code>data/projects/{{ project.id }}.json</code> 中添加原理图与说明</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ====== 预留接口区：PCB 设计 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">🛠️ PCB 设计</h2>
+      <p class="section-sub">布局布线、叠层与实物</p>
+    </div>
+    {% if project.sections.pcb.images | length > 0 %}
+    <div class="media-grid reveal">
+      {% for img in project.sections.pcb.images %}
+      <div class="media-item media-item-full">
+        <img src="{{ img.url }}" alt="{{ img.caption }}">
+        {% if img.caption %}<p class="media-caption">{{ img.caption }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="placeholder-section reveal">
+      <div class="placeholder-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <p class="placeholder-text">此处将展示 PCB 设计</p>
+      <p class="placeholder-hint">后续可在 <code>data/projects/{{ project.id }}.json</code> 中添加 PCB 设计图与文件</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ====== 标签 + 返回 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="detail-tags reveal">
+      <h3>技术标签</h3>
+      <div class="project-tags">
+        {% for tag in project.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="detail-back reveal">
+      <a href="{{ url_for('home') }}" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        返回主页
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Footer ====== -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 杨啸天 · 保留所有权利</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
