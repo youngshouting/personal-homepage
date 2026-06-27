@@ -1,0 +1,12 @@
+<!-- ====== 项目展示 ====== -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">项目展示</h2>
+      <p class="section-sub">硬件项目的完整设计与实现</p>
+    </div>
+    {% for project in projects %}
+    {% include "components/project_card.html" %}
+    {% endfor %}
+  </div>
+</section>

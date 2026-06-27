@@ -1,0 +1,25 @@
+<!-- ====== 单个项目卡片 ====== -->
+<div class="project-card reveal">
+  <div class="project-visual"
+       id="canvas-{{ project.id }}"
+       data-canvas-bg0="{{ project.canvas_colors.bg0 }}"
+       data-canvas-bg1="{{ project.canvas_colors.bg1 }}"
+       data-canvas-dot="{{ project.canvas_colors.dot }}">
+    <div class="project-visual-label">{{ project.type }}</div>
+  </div>
+  <div class="project-meta">
+    <div class="project-type">{{ project.type }}</div>
+    <h3 class="project-name">{{ project.name }}</h3>
+    <p class="project-desc">{{ project.description }}</p>
+    <dl class="project-specs">
+      {% for key, value in project.specs.items() %}
+      <dt>{{ key }}</dt><dd>{{ value }}</dd>
+      {% endfor %}
+    </dl>
+    <div class="project-tags">
+      {% for tag in project.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</div>

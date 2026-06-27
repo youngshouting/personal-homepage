@@ -1,0 +1,34 @@
+<!-- ====== 关于我 ====== -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">关于我</h2>
+      <p class="section-sub">一名致力于磁传感技术的硬件研究者</p>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        {% for para in profile.about_paragraphs %}
+        <p>{{ para }}</p>
+        {% endfor %}
+      </div>
+      <div>
+        <div class="about-skills">
+          <h3>研究方向与技能</h3>
+          <div class="skill-list">
+            {% for skill in skills %}
+            <span class="tag">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="about-info">
+          {% for key, value in profile.info.items() %}
+          <div class="info-item">
+            <div class="info-label">{{ key }}</div>
+            <div class="info-value">{{ value }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
