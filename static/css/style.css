@@ -758,6 +758,85 @@ img{max-width:100%;display:block}
 .back-link svg{transition:.3s}
 .back-link:hover svg{transform:translateX(-3px)}
 
+/* ========== 图片 Lightbox（点击放大 + 下载） ========== */
+.lightbox-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.92);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:.35s cubic-bezier(.22,1,.36,1);
+}
+.lightbox-overlay.open{opacity:1;pointer-events:auto}
+.lightbox-toolbar{
+  position:absolute;top:20px;right:24px;
+  display:flex;align-items:center;gap:12px;
+  z-index:10;
+}
+.lightbox-download{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;
+  border-radius:999px;
+  font-size:13px;font-weight:500;
+  font-family:var(--font);
+  color:var(--text);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  cursor:pointer;
+  transition:.25s;
+  text-decoration:none;
+}
+.lightbox-download:hover{
+  background:rgba(59,130,246,.15);
+  border-color:rgba(59,130,246,.25);
+  color:var(--accent1);
+}
+.lightbox-close{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  color:var(--text);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:.25s;
+}
+.lightbox-close:hover{
+  background:rgba(239,68,68,.2);
+  border-color:rgba(239,68,68,.3);
+  color:#ef4444;
+}
+.lightbox-img{
+  max-width:90vw;
+  max-height:85vh;
+  object-fit:contain;
+  border-radius:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  transform:scale(.9);
+  transition:.35s cubic-bezier(.22,1,.36,1);
+}
+.lightbox-overlay.open .lightbox-img{transform:scale(1)}
+/* 媒体项悬浮提示 */
+.media-item{
+  position:relative;
+  cursor:zoom-in;
+}
+.media-item::after{
+  content:'🔍 点击放大';
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.6);
+  color:var(--text);
+  font-size:14px;
+  font-family:var(--font);
+  font-weight:500;
+  opacity:0;
+  transition:.3s;
+  pointer-events:none;
+}
+.media-item:hover::after{opacity:1}
+
 /* ========== 响应式扩展 ========== */
 @media(max-width:900px){
   .about-grid{grid-template-columns:1fr;gap:40px}
