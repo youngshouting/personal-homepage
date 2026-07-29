@@ -97,6 +97,19 @@ img{max-width:100%;display:block}
   mask-image:radial-gradient(ellipse 70% 60% at center,black,transparent 80%);
   -webkit-mask-image:radial-gradient(ellipse 70% 60% at center,black,transparent 80%);
 }
+.hero-particles{
+  position:absolute;
+  z-index:0;
+  inset:0;
+  opacity:.55;
+  pointer-events:none;
+}
+.hero-particles canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
 .hero-glow{
   position:absolute;
   width:600px;height:600px;
@@ -179,7 +192,7 @@ img{max-width:100%;display:block}
   gap:60px;
   align-items:start;
 }
-.about-text p{color:var(--text2);font-size:15px;margin-bottom:16px;line-height:1.9}
+.about-text p{color:var(--text2);font-size:17px;margin-bottom:16px;line-height:1.9}
 .about-text p:last-child{margin-bottom:0}
 .about-skills h3{font-size:16px;font-weight:600;margin-bottom:16px}
 .skill-list{display:flex;flex-wrap:wrap;gap:8px}
@@ -642,7 +655,7 @@ img{max-width:100%;display:block}
   max-width:800px;
 }
 .detail-text p{
-  font-size:15px;
+  font-size:17px;
   color:var(--text2);
   line-height:2;
   margin-bottom:16px;
@@ -715,6 +728,219 @@ img{max-width:100%;display:block}
   grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
   gap:20px;
 }
+.media-grid.media-stack{
+  grid-template-columns:1fr;
+  max-width:1000px;
+  gap:32px;
+}
+.media-grid.media-stack .media-item{
+  width:100%;
+}
+.media-grid.media-stack .media-item img{
+  max-height:none;
+  object-fit:contain;
+}
+.media-grid.media-stack .media-caption{
+  color:var(--text);
+  font-size:15px;
+  line-height:1.6;
+}
+.media-grid.tmr-hardware-gallery{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:100%;
+  gap:28px;
+  align-items:start;
+}
+.media-grid.tmr-hardware-gallery .media-item{
+  min-width:0;
+}
+.media-grid.tmr-hardware-gallery .media-item:nth-child(3){
+  grid-column:1 / -1;
+  width:min(620px,100%);
+  margin:0 auto;
+}
+.media-grid.tmr-hardware-gallery .media-view{
+  aspect-ratio:3 / 4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#121218;
+}
+.media-grid.tmr-hardware-gallery .media-view img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.media-grid.tmr-schematic-gallery{
+  grid-template-columns:1fr;
+  max-width:100%;
+  gap:28px;
+  align-items:start;
+}
+.media-grid.tmr-schematic-gallery .media-item-full,
+.media-grid.tmr-pcb-gallery .media-item-full{
+  grid-column:auto;
+}
+.media-grid.tmr-schematic-gallery .media-item:first-child{
+  width:min(1100px,100%);
+}
+.media-grid.tmr-schematic-gallery .media-item-compact{
+  max-width:420px;
+  width:100%;
+  justify-self:start;
+}
+.media-grid.tmr-schematic-gallery .media-view img{
+  max-height:780px;
+  object-fit:contain;
+}
+.media-grid.tmr-gallery{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:100%;
+  gap:28px;
+  align-items:start;
+}
+.media-grid.tmr-gallery .media-item:first-child{
+  grid-column:1 / -1;
+  width:min(820px,100%);
+  margin:0 auto;
+}
+.media-grid.tmr-gallery .media-item:not(:first-child){
+  height:100%;
+  display:grid;
+  grid-template-rows:auto auto;
+}
+.media-grid.tmr-gallery .media-item:not(:first-child) .media-view{
+  aspect-ratio:4 / 3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f5f7fa;
+}
+.media-grid.tmr-gallery .media-item:not(:first-child) .media-view img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.media-grid.tmr-gallery .media-item:not(:first-child) .media-caption{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+}
+.media-grid.tmr-pcb-gallery{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:100%;
+  gap:28px;
+  align-items:start;
+}
+.media-grid.tmr-pcb-gallery .media-item{
+  height:100%;
+}
+.media-grid.tmr-pcb-gallery .media-view{
+  aspect-ratio:1 / 1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f5f7fa;
+}
+.media-grid.tmr-pcb-gallery .media-view img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.media-grid.tmr-pcb-gallery .media-item-compact{
+  max-width:420px;
+  width:100%;
+  justify-self:start;
+}
+.media-view{
+  display:block;
+}
+.media-view img{
+  cursor:zoom-in;
+}
+.image-lightbox{
+  width:min(94vw,1600px);
+  height:min(92vh,1000px);
+  max-width:none;
+  max-height:none;
+  padding:0;
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  background:#0b0b0d;
+  color:var(--text);
+}
+.image-lightbox::backdrop{
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(5px);
+}
+.lightbox-toolbar{
+  min-height:58px;
+  padding:10px 14px 10px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(18,18,20,.98);
+}
+.lightbox-title{
+  min-width:0;
+  margin-right:auto;
+  color:var(--text2);
+  font-size:14px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.lightbox-download,
+.lightbox-close{
+  min-height:36px;
+  border:1px solid var(--border);
+  border-radius:6px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  background:#242428;
+  color:#f0f0f0;
+  stroke:#f0f0f0;
+}
+.lightbox-download{
+  padding:0 13px;
+  font-size:12px;
+}
+.lightbox-close{
+  width:36px;
+  cursor:pointer;
+}
+.lightbox-download svg,
+.lightbox-close svg{
+  color:#f0f0f0;
+  stroke:#f0f0f0;
+}
+.lightbox-download:hover,
+.lightbox-close:hover{
+  border-color:rgba(59,130,246,.45);
+  background:rgba(59,130,246,.12);
+}
+.lightbox-stage{
+  height:calc(100% - 58px);
+  padding:18px;
+  overflow:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.lightbox-stage img{
+  width:auto;
+  max-width:100%;
+  max-height:100%;
+  height:auto;
+  display:block;
+  margin:auto;
+  object-fit:contain;
+  background:#f5f7fa;
+}
 .media-item{
   background:var(--card);
   border:1px solid var(--border);
@@ -733,6 +959,9 @@ img{max-width:100%;display:block}
   padding:12px 16px;
   font-size:13px;
   color:var(--text2);
+  border-top:1px solid rgba(255,255,255,.06);
+  background:rgba(255,255,255,.025);
+  font-weight:500;
 }
 
 /* ========== 详情页标签 & 返回 ========== */
@@ -773,6 +1002,15 @@ img{max-width:100%;display:block}
 .media-item:hover img{
   transform:scale(1.02);
 }
+.media-kind-technical img{
+  background:#f5f7fa;
+  padding:10px;
+  object-fit:contain;
+}
+.media-kind-photo img{
+  background:var(--bg3);
+  object-fit:cover;
+}
 .media-item .media-download{
   position:absolute;
   top:12px;right:12px;
@@ -806,6 +1044,9 @@ img{max-width:100%;display:block}
   .project-specs{grid-template-columns:1fr}
   .honors-grid{grid-template-columns:1fr 1fr}
   .media-grid{grid-template-columns:1fr}
+  .media-grid.tmr-hardware-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .media-grid.tmr-schematic-gallery{grid-template-columns:1fr}
+  .media-grid.tmr-pcb-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
   .specs-grid{grid-template-columns:repeat(2,1fr)}
   .internship-header{flex-direction:column}
 }
@@ -819,5 +1060,17 @@ img{max-width:100%;display:block}
   .section{padding:64px 0}
   .project-visual{min-height:200px}
   .specs-grid{grid-template-columns:1fr}
+  .media-grid.tmr-gallery{grid-template-columns:1fr}
+  .media-grid.tmr-gallery .media-item:first-child{
+    grid-column:auto;
+    width:100%;
+  }
+  .media-grid.tmr-pcb-gallery{grid-template-columns:1fr}
+  .media-grid.tmr-hardware-gallery{grid-template-columns:1fr}
+  .media-grid.tmr-hardware-gallery .media-item:nth-child(3){
+    grid-column:auto;
+    width:100%;
+  }
+  .media-grid.tmr-schematic-gallery{grid-template-columns:1fr}
   .timeline{padding-left:24px}
 }

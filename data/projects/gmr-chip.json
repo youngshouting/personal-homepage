@@ -1,49 +1,87 @@
 {
   "id": "gmr-chip",
-  "type": "GMR 技术",
-  "name": "GMR 电流传感器芯片及信号链设计",
-  "role": "项目负责人",
-  "period": "2025.3 — 至今",
-  "status": "进行中",
-  "description_short": "基于巨磁阻效应（GMR）设计电流传感器芯片，从薄膜优化到信号链设计的完整芯片开发流程。",
-  "description_long": "主导 GMR 自旋阀薄膜性能优化与器件图案化设计，结合工艺能力与文献调研，通过光刻工艺实现阻值匹配与灵敏度可控的磁敏单元阵列。\n\n独立完成传感器信号链硬件设计，基于低噪声运放（AD8605）与精密仪表放大器（AD8276）构建信号调理电路，实现零点校准、电压跟随及增益放大功能。负责板载电流传感器 PCB 设计，实现板载电流检测功能。\n\n完成 GMR 薄膜优化和器件设计，拥有宽线性区间、高灵敏度和低磁滞，部分性能超过市售产品，完成信号处理电路设计，实现硬件零点校准和十倍放大信号功能。",
+  "order": 1,
+  "type": "GMR 芯片与系统",
+  "name": "GMR 电流传感器研发",
+  "role": "负责人",
+  "period": "2025.03 — 2026.07",
+  "status": "阶段完成",
+  "description_short": "完成含人工反铁磁层的 GMR 自旋阀薄膜、微纳器件图案化、线性化工艺路线和板载电流传感器系统设计。",
+  "description_long": "主导含人工反铁磁层的 GMR 自旋阀薄膜性能优化与微纳器件图案化设计。基于工艺窗口分析与文献调研，通过光刻工艺实现阻值精确匹配、灵敏度可编程的磁敏单元阵列制备。\n\n开发 GMR 线性化工艺路线，完成半桥器件结构设计与验证，成功制备高线性度 GMR 半桥结构磁传感器；同时负责板载电流传感器系统方案设计与 PCB 实现。\n\n完成 GMR 薄膜、器件与系统全流程优化。GMR 薄膜磁阻率达到 6.42%，交换偏置场达到 400 Oe；传感器线性工作区间达到 ±60 Oe，磁滞误差不超过 1%FS，部分关键性能指标优于主流商用 GMR 芯片。",
   "specs": {
-    "芯片灵敏度": "> 3 mV/V/Oe",
-    "信噪比": "> 60 dB",
-    "信号链路": "GMR 自旋阀 → AD8605 → AD8276",
-    "调理功能": "零点校准 · 电压跟随 · 增益放大",
-    "功耗": "< 5 mW",
-    "状态": "进行中 · 芯片优化阶段"
+    "薄膜磁阻率": "6.42%",
+    "交换偏置场": "400 Oe",
+    "线性工作区间": "±60 Oe",
+    "磁滞误差": "≤ 1%FS",
+    "器件结构": "GMR 半桥",
+    "系统实现": "板载电流传感器 PCB"
   },
-  "tags": ["GMR", "自旋阀薄膜", "光刻工艺", "AD8605", "AD8276", "板载检测"],
+  "visual_metrics": [
+    {"value": "6.42%", "label": "磁阻率"},
+    {"value": "400 Oe", "label": "偏置场"},
+    {"value": "±60 Oe", "label": "线性区"}
+  ],
+  "signal_chain": ["薄膜优化", "器件图案化", "半桥验证", "系统 PCB"],
+  "tags": ["GMR", "自旋阀薄膜", "人工反铁磁层", "光刻工艺", "半桥器件", "板载检测"],
   "canvas_colors": {
-    "bg0": "rgba(139,92,246,0.06)",
-    "bg1": "rgba(8,8,8,0.95)",
-    "dot": "rgba(139,92,246,0.25)"
+    "bg0": "rgba(139,92,246,0.09)",
+    "bg1": "rgba(8,8,8,0.98)",
+    "dot": "#a78bfa"
   },
   "sections": {
+    "hardware": {
+      "title": "硬件实物",
+      "layout": "",
+      "text": "",
+      "images": []
+    },
     "images": {
-      "title": "作品图片",
-      "icon": "📷",
-      "content": []
+      "title": "GMR 项目图片与评估板",
+      "layout": "media-stack",
+      "content": [
+        {
+          "url": "/static/images/projects/gmr-chip/pcb-evaluation-board.webp",
+          "caption": "PCB 板载电流传感器评估板",
+          "kind": "photo"
+        },
+        {
+          "url": "/static/images/projects/gmr-chip/half-bridge-micrograph.webp",
+          "caption": "GMR 半桥传感器显微图",
+          "kind": "photo"
+        },
+        {
+          "url": "/static/images/projects/gmr-chip/output-characteristic.webp",
+          "caption": "GMR 半桥输出特性、磁滞回线与线性拟合",
+          "kind": "technical"
+        },
+        {
+          "url": "/static/images/projects/gmr-chip/performance-metrics.webp",
+          "caption": "GMR 半桥传感器对称区间关键性能指标",
+          "kind": "technical"
+        }
+      ]
     },
     "design_thinking": {
       "title": "设计思路",
-      "icon": "💡",
-      "text": "",
+      "text": "以薄膜性能、器件结构和系统输出的协同优化为主线：先通过人工反铁磁层与工艺窗口调整交换偏置场和磁阻率，再通过光刻图案化与半桥结构获得可用线性区间，最后完成板载电流传感器方案与 PCB 实现。",
       "images": []
     },
     "schematics": {
       "title": "原理图",
-      "icon": "📐",
       "text": "",
       "images": []
     },
     "pcb": {
       "title": "PCB 设计",
-      "icon": "🛠️",
-      "text": "",
-      "images": []
+      "layout": "media-stack",
+      "text": "完成板载电流传感器系统方案设计与 PCB 实现，用于验证 GMR 半桥器件的实际电流检测能力。",
+      "images": [
+        {
+          "url": "/static/images/projects/gmr-chip/pcb-evaluation-board-photo.webp",
+          "caption": "GMR 板载电流传感器 PCB 评估板",
+          "kind": "photo"
+        }
+      ]
     }
   }
 }

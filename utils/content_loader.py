@@ -35,7 +35,7 @@ def get_all_projects():
         with open(fpath, "r", encoding="utf-8") as f:
             data = json.load(f)
         projects.append(data)
-    return projects
+    return sorted(projects, key=lambda project: project.get("order", 999))
 
 
 def get_all_content():

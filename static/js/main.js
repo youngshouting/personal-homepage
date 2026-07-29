@@ -1,16 +1,20 @@
 // ====== 导航滚动效果 ======
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  navbar.classList.toggle('scrolled',window.scrollY>60);
-});
+if (navbar) {
+  window.addEventListener('scroll',()=>{
+    navbar.classList.toggle('scrolled',window.scrollY>60);
+  });
+}
 
 // ====== 移动端菜单 ======
 const toggle=document.getElementById('navToggle');
 const links=document.getElementById('navLinks');
-toggle.addEventListener('click',()=>links.classList.toggle('open'));
-document.querySelectorAll('.nav-links a').forEach(a=>{
-  a.addEventListener('click',()=>links.classList.remove('open'));
-});
+if (toggle && links) {
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>links.classList.remove('open'));
+  });
+}
 
 // ====== 滚动渐入观察器 ======
 const observer=new IntersectionObserver(entries=>{
@@ -112,11 +116,34 @@ document.querySelectorAll('[data-canvas-bg0]').forEach(el=>{
   });
 });
 
-// ====== 图片点击新标签打开 + 下载 ======
-document.addEventListener('click', e => {
-  const target = e.target.closest('.media-item img');
-  if (!target) return;
-  // 如果点击的是下载按钮则不触发
-  if (e.target.closest('.media-download')) return;
-  window.open(target.src, '_blank');
-});
+// ====== 图片站内放大预览 ======
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const lightboxTitle = document.getElementById('lightboxTitle');
+const lightboxDownload = document.getElementById('lightboxDownload');
+const lightboxClose = document.getElementById('lightboxClose');
+
+if (lightbox && lightboxImage && lightboxTitle && lightboxDownload && lightboxClose) {
+  document.querySelectorAll('.media-view').forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      const image = link.querySelector('img');
+      const src = link.getAttribute('href');
+      lightboxImage.src = src;
+      lightboxImage.alt = image?.alt || '';
+      lightboxTitle.textContent = image?.alt || '项目图片';
+      lightboxDownload.href = src;
+      lightbox.showModal();
+    });
+  });
+
+  const closeLightbox = () => {
+    lightbox.close();
+    lightboxImage.src = '';
+  };
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) closeLightbox();
+  });
+}

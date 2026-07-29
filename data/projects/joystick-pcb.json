@@ -1,48 +1,57 @@
 {
   "id": "joystick-pcb",
-  "type": "嵌入式 · PCB",
+  "order": 3,
+  "type": "嵌入式硬件",
   "name": "船舶多功能摇杆控制板",
-  "role": "硬件工程师（实习）",
+  "role": "硬件工程师",
   "period": "2026.03 — 2026.06",
   "status": "已完成",
-  "description_short": "为船舶操控摇杆控制基座板，独立完成原理图设计、选型、BOM 管理及六层 PCB Layout。",
-  "description_long": "本设计为船舶操控摇杆控制基座板，独立完成原理图设计、选型、BOM 管理及六层 PCB Layout。主控 ESP32-S3-MINI-1-N8，支持 Type-C 有线与 Wi-Fi/BLE 无线双冗余通信链路。交互层集成双轴磁编码器、旋转编码器、模拟摇杆及多路物理按键，覆盖船舶推进、舵机微调与菜单精确操控。\n\n电源系统采用 Type-C PD 快充，搭载协议芯片与降压充电 IC，配合 OVP 过压保护、缓启动及 USB 数据开关，形成浪涌、过压、过流、反接四级硬件防护，适应供电波动。\n\nType-C 接口融合 PD 供电、串口调试与 JTAG 烧录三合一功能；板载 FPC 引出多路 I2C 总线扩展外部控制面板。满足船载设备稳定性与可靠性要求。",
+  "description_short": "独立完成船舶摇杆控制基座板的原理图、选型、BOM 管理与六层 PCB Layout，兼顾交互、通信、供电与调试。",
+  "description_long": "面向船舶操控摇杆控制基座，独立完成原理图、器件选型、BOM 管理及六层 PCB Layout。主控采用 ESP32-S3-MINI-1-N8，支持 Type-C 有线与 Wi-Fi/BLE 无线双冗余通信链路。\n\n交互层集成双轴磁编码器、旋转编码器、模拟摇杆及多路物理按键，覆盖船舶推进、舵机微调与菜单精确操控。\n\n电源系统采用 Type-C PD 快充，搭载协议芯片与降压充电 IC，配合 OVP 过压保护、缓启动及 USB 数据开关，形成浪涌、过压、过流、反接四级硬件防护。Type-C 接口融合 PD 供电、串口调试与 JTAG 烧录三合一功能，满足船载设备稳定性与可靠性要求。",
   "specs": {
     "主控": "ESP32-S3-MINI-1-N8",
-    "通信": "Type-C 有线 + Wi-Fi/BLE 无线",
-    "交互": "磁编码器 · 旋转编码器 · 摇杆 · 按键",
-    "电源": "Type-C PD 快充 · 四级硬件防护",
     "PCB": "六层板",
-    "接口": "PD 供电 + 串口调试 + JTAG 烧录"
+    "有线通信": "Type-C",
+    "无线通信": "Wi-Fi / BLE",
+    "电源": "Type-C PD",
+    "调试": "串口 + JTAG"
   },
+  "visual_metrics": [
+    {"value": "6 层", "label": "PCB"},
+    {"value": "PD", "label": "供电"},
+    {"value": "双链路", "label": "通信"}
+  ],
+  "signal_chain": ["磁编码器", "ESP32-S3", "Type-C", "Wi-Fi / BLE"],
   "tags": ["ESP32-S3", "Type-C PD", "Wi-Fi/BLE", "六层 PCB", "磁编码器", "JTAG"],
   "canvas_colors": {
-    "bg0": "rgba(16,185,129,0.06)",
-    "bg1": "rgba(8,8,8,0.95)",
-    "dot": "rgba(16,185,129,0.25)"
+    "bg0": "rgba(16,185,129,0.08)",
+    "bg1": "rgba(8,8,8,0.98)",
+    "dot": "#34d399"
   },
   "sections": {
+    "hardware": {
+      "title": "硬件实物",
+      "layout": "",
+      "text": "",
+      "images": []
+    },
     "images": {
       "title": "作品图片",
-      "icon": "📷",
       "content": []
     },
     "design_thinking": {
       "title": "设计思路",
-      "icon": "💡",
-      "text": "",
+      "text": "控制板同时承担人机交互、通信、电池供电和开发调试职责，因此采用模块化接口与六层叠层组织信号。Type-C 统一承载 PD 供电、串口调试和 JTAG 烧录，并通过有线与无线双链路提升船载场景下的可用性。",
       "images": []
     },
     "schematics": {
       "title": "原理图",
-      "icon": "📐",
       "text": "",
       "images": []
     },
     "pcb": {
       "title": "PCB 设计",
-      "icon": "🛠️",
-      "text": "",
+      "text": "独立完成六层 PCB Layout，将主控、交互接口、无线通信与电源保护分区布局，满足船载设备稳定性与可靠性要求。",
       "images": []
     }
   }

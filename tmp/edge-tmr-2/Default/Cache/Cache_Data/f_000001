@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>非侵入式大电流检测传感器 · 杨啸天</title>
+<link rel="stylesheet" href="/static/css/style.css?v=20260729-2">
+</head>
+<body>
+
+<!-- ====== 详情页导航 ====== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <a href="/"><span>杨啸天</span></a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      返回主页
+    </a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="菜单">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ====== 项目 Hero ====== -->
+<section class="detail-hero">
+  <div class="detail-hero-bg" id="detailCanvas"
+       data-canvas-bg0="rgba(59,130,246,0.08)"
+       data-canvas-bg1="rgba(8,8,8,0.98)"
+       data-canvas-dot="#60a5fa">
+    <div class="detail-hero-content">
+      <div class="detail-hero-badge">TMR 电流传感</div>
+      
+      <span class="project-status status-done">已完成</span>
+      
+      <h1 class="detail-hero-title">非侵入式大电流检测传感器</h1>
+      <p class="detail-hero-sub">
+        <span class="detail-hero-role">负责人</span>
+        <span class="detail-hero-period">2025.03 — 2025.12</span>
+      </p>
+      <p class="detail-hero-desc">主导 TMR 磁传感器信号链硬件研发，实现 ±500 A 非侵入式电流检测，精度达到 0.3%FS，并通过合作公司验收。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 项目概述 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">项目概述</h2>
+    </div>
+    <div class="detail-text reveal">
+      
+      <p>主导 TMR 磁传感器信号链硬件研发，完成芯片选型与评估。设计 12V 输入防护链路，包含防反接、OVP（阈值 15V）及 RC 缓启动；经 DCDC 降压至 6.5V，再由两路 LDO 分别生成 5V 与 3.3V，为传感器、MCU 和运放提供低噪声电源。</p>
+      
+      <p>信号调理与采集采用 MCP6001 产生 1.1V 基准，AD8276 接收传感器电压并差分送入 ADS1115，完成模数转换后通过 I2C 与 STM32 通信；同时完成 MCU 外围与 CAN 总线电路设计。</p>
+      
+      <p>基于立创 EDA 完成四层 PCB 布局并推进小型化结构设计。最终实现 ±500 A 电流检测，精度 0.3%FS，与闭环电流传感器精度相当；系统支持 CAN 通信，通过合作公司验收并进入小批量试产阶段。</p>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ====== 技术规格 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">技术规格</h2>
+    </div>
+    <div class="specs-grid reveal">
+      
+      <div class="specs-item">
+        <dt class="specs-label">检测量程</dt>
+        <dd class="specs-value">±500 A</dd>
+      </div>
+      
+      <div class="specs-item">
+        <dt class="specs-label">检测精度</dt>
+        <dd class="specs-value">0.3%FS</dd>
+      </div>
+      
+      <div class="specs-item">
+        <dt class="specs-label">信号采集</dt>
+        <dd class="specs-value">AD8276 + ADS1115</dd>
+      </div>
+      
+      <div class="specs-item">
+        <dt class="specs-label">控制与通信</dt>
+        <dd class="specs-value">STM32 + I2C + CAN</dd>
+      </div>
+      
+      <div class="specs-item">
+        <dt class="specs-label">电源架构</dt>
+        <dd class="specs-value">12V → 6.5V → 5V / 3.3V</dd>
+      </div>
+      
+      <div class="specs-item">
+        <dt class="specs-label">PCB</dt>
+        <dd class="specs-value">四层板</dd>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ====== 预留接口区：作品图片 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">📷 作品图片</h2>
+      <p class="section-sub">实物展示与成果</p>
+    </div>
+    
+    <div class="media-grid tmr-gallery reveal">
+      
+      <div class="media-item media-kind-photo">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/experiment-setup.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/experiment-setup.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/experiment-setup.webp" alt="TMR 电流传感器实验环境与测试平台">
+        </a>
+        <p class="media-caption">TMR 电流传感器实验环境与测试平台</p>
+      </div>
+      
+      <div class="media-item media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/measured-current.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/measured-current.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/measured-current.webp" alt="±500 A 范围内实测电流与原边电流的线性关系">
+        </a>
+        <p class="media-caption">±500 A 范围内实测电流与原边电流的线性关系</p>
+      </div>
+      
+      <div class="media-item media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/absolute-error.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/absolute-error.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/absolute-error.webp" alt="全量程绝对误差测试结果">
+        </a>
+        <p class="media-caption">全量程绝对误差测试结果</p>
+      </div>
+      
+      <div class="media-item media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/relative-error.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/relative-error.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/relative-error.webp" alt="全量程相对误差测试结果">
+        </a>
+        <p class="media-caption">全量程相对误差测试结果</p>
+      </div>
+      
+      <div class="media-item media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/performance-specs.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/performance-specs.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/performance-specs.webp" alt="TMR 电流传感器关键性能指标">
+        </a>
+        <p class="media-caption">TMR 电流传感器关键性能指标</p>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+<!-- ====== TMR 硬件实物 ====== -->
+
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">🔧 TMR 硬件实物</h2>
+      
+      <p class="section-sub">TMR 电流传感器 PCB 主板、传感器本体及整机结构实物展示。</p>
+      
+    </div>
+    
+    <div class="media-grid tmr-hardware-gallery reveal">
+      
+      <div class="media-item media-kind-photo">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/hardware-main-front.png" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/hardware-main-front.png" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/hardware-main-front.png" alt="TMR 电流传感器 PCB 主板正面实物图">
+        </a>
+        <p class="media-caption">TMR 电流传感器 PCB 主板正面实物图</p>
+      </div>
+      
+      <div class="media-item media-kind-photo">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/hardware-main-back.png" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/hardware-main-back.png" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/hardware-main-back.png" alt="TMR 电流传感器 PCB 主板背面实物图">
+        </a>
+        <p class="media-caption">TMR 电流传感器 PCB 主板背面实物图</p>
+      </div>
+      
+      <div class="media-item media-kind-photo">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/sensor-physical.png" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/sensor-physical.png" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/sensor-physical.png" alt="TMR 电流传感器实物图">
+        </a>
+        <p class="media-caption">TMR 电流传感器实物图</p>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- ====== 预留接口区：设计思路 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">💡 设计思路</h2>
+      <p class="section-sub">方案选型与设计考量</p>
+    </div>
+    
+    
+    <div class="detail-text reveal">
+      <p>围绕非侵入式大电流检测的低噪声与可靠性要求，将系统拆分为输入保护、分级稳压、基准生成、差分接收、模数采集和数字通信六个模块。模拟与数字区域在四层 PCB 中分区布局，并以完整地平面和短回流路径降低微弱信号受到的干扰。</p>
+    </div>
+    
+    
+    <div class="media-grid media-stack reveal">
+      
+      <div class="media-item media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/hardware-block-diagram.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/hardware-block-diagram.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/hardware-block-diagram.webp" alt="TMR 电流传感器硬件系统框图">
+        </a>
+        <p class="media-caption">TMR 电流传感器硬件系统框图</p>
+      </div>
+      
+    </div>
+    
+    
+  </div>
+</section>
+
+<!-- ====== 预留接口区：原理图 ====== -->
+
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">📐 原理图</h2>
+      <p class="section-sub">电路原理设计与方案</p>
+    </div>
+    
+    <div class="detail-text reveal">
+      
+      <p>12V 输入经防反接、OVP 和 RC 缓启动保护后，DCDC 降压至 6.5V，再由两路 LDO 输出 5V 与 3.3V。MCP6001 产生 1.1V 基准，AD8276 接收传感器信号并送入 ADS1115，最终通过 I2C 与 STM32 通信，同时集成 CAN 总线接口。</p>
+      
+    </div>
+    
+    
+    <div class="media-grid tmr-schematic-gallery reveal">
+      
+      <div class="media-item media-item-full media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/schematic.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/schematic.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/schematic.webp" alt="TMR 电流传感器完整原理图">
+        </a>
+        <p class="media-caption">TMR 电流传感器完整原理图</p>
+      </div>
+      
+      <div class="media-item media-item-full media-kind-technical media-item-compact">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/tmr-chip-temp-schematic.png" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/tmr-chip-temp-schematic.png" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/tmr-chip-temp-schematic.png" alt="TMR 芯片与温度传感器 PCB 原理图">
+        </a>
+        <p class="media-caption">TMR 芯片与温度传感器 PCB 原理图</p>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- ====== 预留接口区：PCB 设计 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">🛠️ PCB 设计</h2>
+      <p class="section-sub">布局布线、叠层与实物</p>
+    </div>
+    
+    
+    <div class="detail-text reveal">
+      
+      <p>使用立创 EDA 完成四层 PCB 布局，重点处理模拟/数字分区、电源回路与地平面完整性，并同步推进结构小型化。</p>
+      
+    </div>
+    
+    
+    <div class="media-grid tmr-pcb-gallery reveal">
+      
+      <div class="media-item media-item-full media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/pcb-layout-top.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/pcb-layout-top.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/pcb-layout-top.webp" alt="TMR 电流传感器 PCB 版图 - 顶层与器件布局">
+        </a>
+        <p class="media-caption">TMR 电流传感器 PCB 版图 - 顶层与器件布局</p>
+      </div>
+      
+      <div class="media-item media-item-full media-kind-technical">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/pcb-layout-bottom.webp" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/pcb-layout-bottom.webp" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/pcb-layout-bottom.webp" alt="TMR 电流传感器 PCB 版图 - 底层与布线">
+        </a>
+        <p class="media-caption">TMR 电流传感器 PCB 版图 - 底层与布线</p>
+      </div>
+      
+      <div class="media-item media-item-full media-kind-technical media-item-compact">
+        <a class="media-download" href="/static/images/projects/tmr-sensor/tmr-chip-temp-pcb.png" download title="下载图片">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a class="media-view" href="/static/images/projects/tmr-sensor/tmr-chip-temp-pcb.png" target="_blank" rel="noreferrer" title="查看大图">
+          <img src="/static/images/projects/tmr-sensor/tmr-chip-temp-pcb.png" alt="TMR 芯片与温度传感器 PCB 实物布局">
+        </a>
+        <p class="media-caption">TMR 芯片与温度传感器 PCB 实物布局</p>
+      </div>
+      
+    </div>
+    
+    
+  </div>
+</section>
+
+<!-- ====== 标签 + 返回 ====== -->
+<section class="section">
+  <div class="container">
+    <div class="detail-tags reveal">
+      <h3>技术标签</h3>
+      <div class="project-tags">
+        
+        <span class="tag">TMR</span>
+        
+        <span class="tag">低噪声电源</span>
+        
+        <span class="tag">信号调理</span>
+        
+        <span class="tag">四层 PCB</span>
+        
+        <span class="tag">STM32</span>
+        
+        <span class="tag">CAN</span>
+        
+      </div>
+    </div>
+    <div class="detail-back reveal">
+      <a href="/" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        返回主页
+      </a>
+    </div>
+  </div>
+</section>
+
+<dialog class="image-lightbox" id="imageLightbox">
+  <div class="lightbox-toolbar">
+    <span class="lightbox-title" id="lightboxTitle"></span>
+    <a class="lightbox-download" id="lightboxDownload" href="#" download>
+      <svg width="16" height="16" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      下载原图
+    </a>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭大图">
+      <svg width="20" height="20" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="lightbox-stage">
+    <img id="lightboxImage" src="" alt="">
+  </div>
+</dialog>
+
+<!-- ====== Footer ====== -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 杨啸天 · 保留所有权利</p>
+  </div>
+</footer>
+
+<script src="/static/js/main.js?v=20260727-1"></script>
+</body>
+</html>
