@@ -23,6 +23,23 @@ app.secret_key = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
 csrf = CSRFProtect(app)
 
 
+# ── 静态资源缓存加速 ──────────────────────────────
+@app.after_request
+def add_cache_headers(response):
+    """为静态资源加上长效缓存头，减少重复下载。"""
+    path = request.path
+    # 图片：缓存 30 天
+    if path.startswith("/static/images/"):
+        response.headers["Cache-Control"] = "public, max-age=2592000, immutable"
+    # CSS/JS：缓存 7 天（用 ?v= 参数解决更新问题）
+    elif path.startswith("/static/css/") or path.startswith("/static/js/"):
+        response.headers["Cache-Control"] = "public, max-age=604800, immutable"
+    # HTML 页面：缓存 10 分钟，确保内容及时更新
+    elif path == "/" or path.startswith("/project/"):
+        response.headers["Cache-Control"] = "public, max-age=600"
+    return response
+
+
 @app.route("/")
 def home():
     """渲染主页。"""
