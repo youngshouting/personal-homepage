@@ -51,7 +51,7 @@ def home():
 def project_detail(project_id):
     """项目详情页。"""
     project = load_project(project_id)
-    if project is None:
+    if project is None or project.get("no_detail"):
         abort(404)
     return render_template("project_detail.html", project=project)
 

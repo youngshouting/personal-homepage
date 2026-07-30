@@ -1,6 +1,7 @@
 {
   "id": "joystick-pcb",
   "order": 3,
+  "no_detail": true,
   "type": "嵌入式硬件",
   "name": "船舶多功能摇杆控制板",
   "role": "硬件工程师",
